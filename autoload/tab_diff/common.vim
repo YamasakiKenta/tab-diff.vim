@@ -1,7 +1,7 @@
 function! tab_diff#common#map_diff_reset() "{{{
-	map <buffer> <A-up> <A-up>
-	map <buffer> <A-down> <A-down>
-	map <buffer> <A-left> <A-left>
+	map <buffer> <A-up>    <A-up>
+	map <buffer> <A-down>  <A-down>
+	map <buffer> <A-left>  <A-left>
 	map <buffer> <A-right> <A-right>
 endfunction "}}}
 function! tab_diff#common#map_diff_tab() "{{{
@@ -25,11 +25,10 @@ function! tab_diff#common#tabcopy() "{{{
 	
 endfunction "}}}
 function! tab_diff#common#map_diff() "{{{
-	map <buffer> <A-up> [c
-	map <buffer> <A-down> ]c
+	map <buffer> <A-up>    [c
+	map <buffer> <A-down>  ]c
 	map <buffer> <A-left>  :diffget<CR>:<C-u>diffupdate<CR>|"
 	map <buffer> <A-right> :diffget<CR>:<C-u>diffupdate<CR>|"
-	map <buffer> <tab> :<C-u>call tab-diff#common#map_diff_tab()<CR>|"
-
-	echo 'vimwork'
+	map <buffer> <tab>     :<C-u>call tab-diff#common#map_diff_tab()<CR>|"
+	map <buffer> <F5>      :<C-u>diffupdate<CR>|"
 endfunction "}}}
