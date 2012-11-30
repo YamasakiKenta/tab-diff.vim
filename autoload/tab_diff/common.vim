@@ -1,3 +1,6 @@
+let s:save_cpo = &cpo
+set cpo&vim
+
 function! tab_diff#common#map_diff_reset() "{{{
 	map <buffer> <A-up>    <A-up>
 	map <buffer> <A-down>  <A-down>
@@ -32,3 +35,7 @@ function! tab_diff#common#map_diff() "{{{
 	map <buffer> <tab>     :<C-u>call tab-diff#common#map_diff_tab()<CR>|"
 	map <buffer> <F5>      :<C-u>diffupdate<CR>|"
 endfunction "}}}
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
