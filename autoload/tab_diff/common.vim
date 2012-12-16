@@ -1,6 +1,8 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+let s:Tab = vital#of('tab-diff.vim').import('Mind.Tab')
+
 function! tab_diff#common#map_diff_reset() "{{{
 	map <buffer> <A-up>    <A-up>
 	map <buffer> <A-down>  <A-down>
@@ -12,20 +14,6 @@ function! tab_diff#common#map_diff_tab() "{{{
 	" タブ切り替え時に処理を追加するため作成した
 	"********************************************************************************
 	wincmd w
-endfunction "}}}
-function! tab_diff#common#tabcopy() "{{{
-	let bufnrs = []
-	windo let bufnrs += [bufnr("%")]
-
-	tabe
-	" 最初の画面の更新
-	exe 'b' bufnrs[0]
-
-	" 2画面目からは、分割する
-	for bufnr in bufnrs[1:]
-		exe 'sb' bufnr
-	endfor	
-	
 endfunction "}}}
 function! tab_diff#common#map_diff() "{{{
 	map <buffer> <A-up>    [c
