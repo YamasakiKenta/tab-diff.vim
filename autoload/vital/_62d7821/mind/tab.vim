@@ -1,6 +1,20 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+function! s:_map_diff() "{{{
+	map <buffer> <A-up>    [c
+	map <buffer> <A-down>  ]c
+	map <buffer> <A-left>  :diffget<CR>:<C-u>diffupdate<CR>|"
+	map <buffer> <A-right> :diffget<CR>:<C-u>diffupdate<CR>|"
+	map <buffer> <tab>     :<C-u>call _map_diff_tab()<CR>|"
+	map <buffer> <F5>      :<C-u>diffupdate<CR>|"
+endfunction "}}}
+function! s:_map_diff_reset() "{{{
+	map <buffer> <A-up>    <A-up>
+	map <buffer> <A-down>  <A-down>
+	map <buffer> <A-left>  <A-left>
+	map <buffer> <A-right> <A-right>
+endfunction "}}}
 function! s:open_files(files) "{{{
 	let files_ = a:files
 
@@ -45,20 +59,20 @@ endfunction "}}}
 function! s:tab_diff_start() "{{{
 			call s:copy_wins()
 			windo diffthis
-			windo call <SID>map_diff()
+			windo call s:_map_diff()
 endfunction
 "}}}
 function! s:tab_diff_end() "{{{
 			diffoff!
-			windo call s:map_diff_reset()
+			windo call s:_map_diff_reset()
 			tabc
 endfunction
 "}}}
 function! s:tab_diff_orig() "{{{
-	call <SID>copy_wins()
+	call s:copy_wins()
 	only
 	DiffOrig
-	windo call <SID>map_diff()
+	windo call s:_map_diff()
 endfunction
 "}}}
 
