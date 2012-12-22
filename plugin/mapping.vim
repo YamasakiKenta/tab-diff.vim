@@ -17,24 +17,22 @@ function! s:map_diff_reset() "{{{
 	map <buffer> <A-left>  <A-left>
 	map <buffer> <A-right> <A-right>
 endfunction "}}}
-function! s:copy_wins() "{{{
-	call s:Tab.copy_wins()
+function! s:tab_diff_start() "{{{
+	call s:Tab.tab_diff_start()
+endfunction
+"}}}
+function! s:tab_diff_end() "{{{
+	call s:Tab.tab_diff_end()
+endfunction
+"}}}
+function! s:tab_diff_orig() "{{{
+	call s:Tab.tab_diff_orig()
 endfunction
 "}}}
 
-noremap <PLUG>(tab_diff_start)
-			\ :<C-u>call <SID>copy_wins()<CR>:windo diffthis<CR>:windo call <SID>map_diff()<CR>|"
-
-noremap <PLUG>(tab_diff_end)
-			\ :<C-u>diffoff!<CR>:windo call <SID>map_diff_reset()<CR>:tabc<CR>|"
-
-noremap <PLUG>(tab_diff_orig)
-			\ :<C-u>call <SID>copy_wins()<CR>:only<CR>:DiffOrig<CR>:windo call <SID>map_diff()<CR>|"
-
-nmap ;dy<CR> <PLUG>(tab_diff_start)
-nmap ;dn<CR> <PLUG>(tab_diff_end)
-nmap ;do<CR> <PLUG>(tab_diff_orig)
-
+nmap ;dy<CR> :<C-u>call <SID>tab_diff_start()<CR>
+nmap ;dn<CR> :<C-u>call <SID>tab_diff_end()<CR>
+nmap ;do<CR> :<C-u>call <SID>tab_diff_orig()<CR>
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
